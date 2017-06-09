@@ -2,8 +2,11 @@
 title: "N Good Health Process Level Report - May 2017"
 output: 
   flexdashboard::flex_dashboard:
+    navbar:
+      - { title: "06/01/2017", href: "", align: right }
     theme: lumen
     orientation: rows
+
         
 ---
 

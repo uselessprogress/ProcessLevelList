@@ -108,4 +108,5 @@ detaildata <-
 write.csv(detaildata,"pldata.csv",row.names = FALSE,na="")
 
 
-render("/Volumes/VirtualDrive/CurrentProjects/PL Report/PL_Dashboard.Rmd", flex_dashboard(self_contained=TRUE,theme= "lumen",orientation="rows"))
+render("PL_Dashboard.Rmd", flex_dashboard(self_contained=TRUE,theme= "lumen",orientation="rows"))
+
