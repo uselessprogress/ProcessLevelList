@@ -1,0 +1,76 @@
+---
+title: "N Good Health Process Level Report - May 2017"
+output: 
+  flexdashboard::flex_dashboard:
+    theme: lumen
+    orientation: rows
+        
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(DT)
+df <- read.csv("pldata.csv")
+```
+
+Row {data-height=150}
+-------------------------------------
+
+### Step 1 Average
+```{r}
+articles <- paste0(format(mean(as.numeric(gsub("%","",df$Step1))),digits = 3),"%")
+valueBox(articles, icon = "fa-pencil-square-o")
+```
+
+### Step 2 Average
+```{r}
+articles <- paste0(format(mean(as.numeric(gsub("%","",df$Step2))),digits = 3),"%")
+valueBox(articles, icon = "fa-check-square-o")
+```
+
+### Step 3 Average
+```{r}
+articles <- paste0(format(mean(as.numeric(gsub("%","",df$Step3))),digits = 3),"%")
+valueBox(articles, icon = "fa-user-md")
+
+```
+
+### Step 4 Average
+```{r}
+
+articles <- paste0(format(mean(as.numeric(gsub("%","",df$Step4))),digits = 3),"%")
+valueBox(articles, icon = "fa-plus-square-o")
+```
+
+### Completed All 4 Steps
+```{r}
+
+articles <- paste0(format(mean(as.numeric(gsub("%","",df$All4Steps))),digits = 3),"%")
+valueBox(articles, icon = "fa-check-square-o")
+```
+
+
+Row {data-height=850}
+-------------------------------------
+
+### Progress by Department
+```{r}
+
+datatable(df, 
+          filter = 'top', 
+          extensions = 'Buttons', 
+          width = "100%",
+          style="bootstrap",
+          class="compact hover",
+          rownames=FALSE,
+          colnames = c('Process Level', 'Department','Step 1', 'Step 2', 'Step 3', 'Step 4', 'All 4 Steps','Has Insurance', 'Has NGH Account'),
+          options = list(pageLength = 20, 
+                         autoWidth = TRUE,  
+                         orientation ='landscape',
+                         columnDefs = list(list(width = '250px', targets = c(0, 1))),
+                         dom = 'Btip',
+                         buttons = list('copy', 'csv', 'excel', 'print', 
+                         list(extend = 'pdf', pageSize = 'A4',orientation = 'landscape',
+                              message = 'N Good Health Progress Report - June 2017',
+                              filename = 'NGH_Progress_Report_June_2017'))))
+```
